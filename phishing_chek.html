@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Phishing Warning Checker</title>
+<style>
+body {
+  font-family: Arial;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+}
+.warning {
+  background: red;
+  padding: 15px;
+  margin-top: 20px;
+}
+.safe {
+  background: green;
+  padding: 15px;
+}
+</style>
+</head>
+<body>
+
+<h1>⚠️ Phishing Safety Checker</h1>
+
+<p>Before trusting a website, check the following:</p>
+
+<ul>
+  <li>❌ No HTTPS (lock icon)</li>
+  <li>❌ Misspelled domain name</li>
+  <li>❌ Asks for password or OTP</li>
+  <li>❌ Urgent messages like "Account Suspended"</li>
+  <li>❌ Fake login forms</li>
+</ul>
+
+<div class="warning">
+<b>WARNING:</b> Never enter personal info if these signs exist.
+</div>
+
+<div class="safe">
+<b>SAFE TIP:</b> Verify website manually in your browser.
+</div>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Phishing URL Checker</title>
+<style>
+body { font-family: Arial; background:#121212; color:#fff; padding:20px; }
+input, button { padding:10px; width:100%; margin-top:10px; }
+.result { margin-top:20px; font-size:18px; }
+</style>
+</head>
+<body>
+
+<h2>🔍 Phishing URL Checker</h2>
+
+<input id="url" placeholder="Enter website URL">
+<button onclick="check()">Check</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function check() {
+  let url = document.getElementById("url").value;
+  let score = 0;
+
+  if (!url.startsWith("https")) score++;
+  if (url.length > 75) score++;
+  if (url.includes("@")) score++;
+  if (url.match(/\d+\.\d+\.\d+\.\d+/)) score++;
+
+  let suspiciousWords = ["login","verify","secure","update","account"];
+  suspiciousWords.forEach(word => {
+    if (url.toLowerCase().includes(word)) score++;
+  });
+
+  let result = document.getElementById("result");
+  if (score >= 3) {
+    result.innerHTML = "🚨 HIGH RISK: Likely Phishing!";
+    result.style.color = "red";
+  } else {
+    result.innerHTML = "✅ LOW RISK (Not guaranteed safe)";
+    result.style.color = "lime";
+  }
+}
+</script>
+
+</body>
+</html>
